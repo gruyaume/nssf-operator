@@ -1,0 +1,26 @@
+name: nssf-operator
+display-name: 5G NSSF operator
+summary: 5G NSSF operator
+description: 5G NSSF operator
+
+containers:
+  nssf:
+    resource: nssf-image
+    mounts:
+      - storage: nssf-volume
+        location: /etc/nssf/
+
+resources:
+  nssf-image:
+    type: oci-image
+    description: OCI image for 5G nssf
+    upstream-source: omecproject/5gc-nssf:master-4e5aef3
+
+storage:
+  nssf-volume:
+    type: filesystem
+    minimum-size: 1M
+
+requires:
+  nrf:
+    interface: nrf
