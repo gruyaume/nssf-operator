@@ -33,12 +33,13 @@ class NSSFOperatorCharm(CharmBase):
         self._container = self.unit.get_container(self._container_name)
         self._nrf_requires = NRFRequires(charm=self, relationship_name="nrf")
         self.framework.observe(self.on.nssf_pebble_ready, self._on_nssf_pebble_ready)
+        self.framework.observe(self.on.nrf_relation_created, self._on_nssf_pebble_ready)
         self.framework.observe(self._nrf_requires.on.nrf_available, self._on_nrf_available)
 
         self._service_patcher = KubernetesServicePatch(
             charm=self,
             ports=[
-                ServicePort(name="sbi", port=29507),
+                ServicePort(name="sbi", port=29531),
             ],
         )
 
